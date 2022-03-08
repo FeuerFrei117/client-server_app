@@ -1,0 +1,9 @@
+one:
+- one
+- two
+- three
+three:
+  one: ₿
+  three: ₨
+  two: €
+two: 123
