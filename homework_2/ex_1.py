@@ -21,7 +21,6 @@ from pprint import pprint
 from chardet import detect
 
 files = ['info_1.txt', 'info_2.txt', 'info_3.txt']
-new_files = ['info_2.txt', 'info_3.txt']
 
 
 def get_data():
@@ -33,11 +32,11 @@ def get_data():
                  os_prod_list, os_name_list, os_code_list, os_type_list]
 
     for file in files:
-        with open(os.getcwd() + f'\\{file}', 'rb') as f:
+        with open(os.path.join(os.getcwd(), file), 'rb') as f:
             content = f.read()
         encod = detect(content)['encoding']
 
-        with open(os.getcwd() + f'\\{file}', 'r', encoding=encod) as f:
+        with open(os.path.join(os.getcwd(), file), 'r', encoding=encod) as f:
             for line in f:
                 result = re.split(r':', line)
                 if 'Изготовитель системы' in result:
@@ -66,7 +65,7 @@ def write_to_csv(link):
         data.writerows(new_data)
 
 
-write_to_csv(os.getcwd() + '\\file_for_ex_1.csv')
+write_to_csv(os.path.join(os.getcwd(), 'file_for_ex_1.csv'))
 
 '''
 Не понимаю почему вывод идет с дополнительно вставленными пустыми списками.
