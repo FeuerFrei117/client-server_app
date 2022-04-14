@@ -4,7 +4,7 @@ import sys
 from common.variables import LOGGING_LEVEL
 sys.path.append('../')
 
-client_formatter = logging.Formatter("%(asctime)s %(levelname)s - %(module)s - %(message)s")
+client_formatter = logging.Formatter("%(asctime)s - %(levelname)-8s - %(filename)-8s - %(message)s")
 
 PATH = os.path.dirname(os.path.abspath(__file__))
 PATH = os.path.join(PATH, 'client.log')
@@ -28,17 +28,4 @@ if __name__ == '__main__':
     logger.warning('Предупреждение')
     logger.error('Ошибка')
     logger.critical('Критическое сообщение')
-
-
-
-
-
-
-
-
-
-
-
-
-
 

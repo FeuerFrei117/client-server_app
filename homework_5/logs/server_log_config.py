@@ -13,6 +13,7 @@ PATH = os.path.join(PATH, 'server_log_config.log')
 stream_handler = logging.StreamHandler(sys.stderr)
 stream_handler.setFormatter(server_formatter)
 stream_handler.setLevel(logging.DEBUG)
+
 log_file = handlers.TimedRotatingFileHandler(PATH, when='D', interval=1, encoding='utf-8')
 log_file.setFormatter(server_formatter)
 

@@ -1,26 +1,26 @@
 import logging
 import os
 import sys
+from logging import handlers
 from common.variables import LOGGING_LEVEL
 sys.path.append('../')
 
-client_formatter = logging.Formatter("%(asctime)s %(levelname)s - %(module)s - %(message)s")
+server_formatter = logging.Formatter('%(asctime)s - %(levelname)-8s - %(filename)-8s - %(message)s ')
 
 PATH = os.path.dirname(os.path.abspath(__file__))
-PATH = os.path.join(PATH, 'client.log')
+PATH = os.path.join(PATH, 'server_log_config.log')
 
 stream_handler = logging.StreamHandler(sys.stderr)
-stream_handler.setFormatter(client_formatter)
+stream_handler.setFormatter(server_formatter)
 stream_handler.setLevel(logging.DEBUG)
 
-log_file = logging.FileHandler(PATH, encoding='utf-8')
-log_file.setFormatter(client_formatter)
+log_file = handlers.TimedRotatingFileHandler(PATH, when='D', interval=1, encoding='utf-8')
+log_file.setFormatter(server_formatter)
 
-logger = logging.getLogger('client')
+logger = logging.getLogger('server')
 logger.addHandler(stream_handler)
 logger.addHandler(log_file)
 logger.setLevel(LOGGING_LEVEL)
-
 
 if __name__ == '__main__':
     logger.debug('Отладочная информация')
@@ -28,17 +28,3 @@ if __name__ == '__main__':
     logger.warning('Предупреждение')
     logger.error('Ошибка')
     logger.critical('Критическое сообщение')
-
-
-
-
-
-
-
-
-
-
-
-
-
-
